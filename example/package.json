@@ -12,7 +12,8 @@
     "fast-install-project": "npm run pack:pkg && npm install --legacy-peer-deps",
     "fastpkg": "npm run fast-install-project && npm run dev",
     "fast:pkg": "npm run fastpkg",
-    "codegen:lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-gif-player --cpp-output-path ../harmony/gif_player/src/main/cpp/generated --ets-output-path ../harmony/gif_player/src/main/ets/generated --cpp-components-spec-paths ../specs"
+    "codegen:lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-gif-player --cpp-output-path ../harmony/gif_player/src/main/cpp/generated --ets-output-path ../harmony/gif_player/src/main/ets/generated --cpp-components-spec-paths ../specs",
+    "postinstall": "node ./scripts/create-build-profile"
   },
   "dependencies": {
     "@react-native-oh/react-native-harmony": "0.72.146",
