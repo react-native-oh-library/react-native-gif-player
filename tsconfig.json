@@ -1,4 +1,5 @@
 {
+  "exclude": ["harmony"],
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
