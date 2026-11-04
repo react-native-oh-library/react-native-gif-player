@@ -10,34 +10,27 @@
   "files": [
     "src",
     "lib",
-    "android",
-    "ios",
+    "harmony",
     "cpp",
     "*.podspec",
-    "!ios/build",
-    "!android/build",
-    "!android/gradle",
-    "!android/gradlew",
-    "!android/gradlew.bat",
-    "!android/local.properties",
+    "!*/build",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-gif-player-example",
+    "codegen-lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-gif-player --cpp-output-path ./harmony/gif_player/src/main/cpp/generated --ets-output-path ./harmony/gif_player/src/main/ets/generated --cpp-components-spec-paths ./specs",
+    "pack": "npm pack",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "bob build",
     "release": "release-it"
   },
   "keywords": [
     "react-native",
-    "ios",
-    "android",
+    "harmony",
     "gif",
     "gifs",
     "react-native gif",
@@ -47,14 +40,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ysfzrn/react-native-gif-player.git"
+    "url": "git+https://github.com/react-native-oh-library/react-native-gif-player.git"
   },
   "author": "ysfzrn <ysfzrn@gmail.com> (https://github.com/ysfzrn)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ysfzrn/react-native-gif-player/issues"
-  },
-  "homepage": "https://github.com/ysfzrn/react-native-gif-player#readme",
+  "harmony": {
+    "alias": "react-native-gif-player"
+    },
+  "homepage": "https://github.com/react-native-oh-library/react-native-gif-player#READEME",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -84,13 +77,15 @@
   "resolutions": {
     "@types/react": "17.0.21"
   },
+  "overrides": {
+    "@types/react-test-renderer": {
+      "@types/react": "^17.0.21"
+    }
+  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
-  "workspaces": [
-    "example"
-  ],
   "packageManager": "yarn@4.1.0",
   "engines": {
     "node": ">= 18.0.0"
@@ -146,7 +141,8 @@
       [
         "typescript",
         {
-          "project": "tsconfig.build.json"
+          "project": "tsconfig.build.json",
+          "tsc": "./node_modules/.bin/tsc"
         }
       ]
     ]
