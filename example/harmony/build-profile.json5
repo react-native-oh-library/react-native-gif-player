@@ -7,11 +7,11 @@
         "material": {
           "certpath": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001AA8F78C604E9FB3645B4C10E46EE8D4D736849D8E28D202672BADC936A13DC2C500FCB8D1C7FA",
+          "keyPassword": "0000001ACBC81910B1AD6C286DD5AA01982ECF052AB863E6C80031591DEF4011ADF94964326847A69BFB",
           "profile": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.p12",
-          "storePassword": "0000001A59A809427518CD921A6073C8586251CC435C97F01B1A9237A29A2A768AA87E97B847EB9B84EA"
+          "storePassword": "0000001A365138CA57D469B516098164A433686BE0BD3DB0C1C1BFB2E5623A6F4CBFFB4F791CD16950A2"
         }
       }
     ],
@@ -51,6 +51,10 @@
           ]
         }
       ]
+    },
+    {
+      "name": "gif_player",
+      "srcPath": "../../harmony/gif_player"
     }
   ]
 }
