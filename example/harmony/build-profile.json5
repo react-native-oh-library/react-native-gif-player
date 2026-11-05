@@ -1,60 +1,47 @@
 {
-  "app": {
-    "signingConfigs": [
+  app: {
+    products: [
       {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.cer",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001ACBC81910B1AD6C286DD5AA01982ECF052AB863E6C80031591DEF4011ADF94964326847A69BFB",
-          "profile": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/ding_chengjie/.ohos/config/default_harmony_7VWIjnpx_ulAtHZbjj8ESTdad6hIYqFTcngRw9LyVPM=.p12",
-          "storePassword": "0000001A365138CA57D469B516098164A433686BE0BD3DB0C1C1BFB2E5623A6F4CBFFB4F791CD16950A2"
-        }
-      }
+        name: 'default',
+        signingConfig: 'default',
+        targetSdkVersion: '6.0.1(21)',
+        compatibleSdkVersion: '5.0.1(13)',
+        runtimeOS: 'HarmonyOS',
+        buildOption: {
+          strictMode: {
+            caseSensitiveCheck: true,
+            useNormalizedOHMUrl: true,
+          },
+        },
+      },
     ],
-    "products": [
+    buildModeSet: [
       {
-        "name": "default",
-        "signingConfig": "default",
-        "targetSdkVersion": "6.0.1(21)",
-        "compatibleSdkVersion": "5.0.1(13)",
-        "runtimeOS": "HarmonyOS",
-        "buildOption": {
-          "strictMode": {
-            "caseSensitiveCheck": true,
-            "useNormalizedOHMUrl": true
-          }
-        }
-      }
-    ],
-    "buildModeSet": [
-      {
-        "name": "debug",
+        name: 'debug',
       },
       {
-        "name": "release"
-      }
-    ]
+        name: 'release',
+      },
+    ],
+    signingConfigs: [
+    ],
   },
-  "modules": [
+  modules: [
     {
-      "name": "entry",
-      "srcPath": "./entry",
-      "targets": [
+      name: 'entry',
+      srcPath: './entry',
+      targets: [
         {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
+          name: 'default',
+          applyToProducts: [
+            'default',
+          ],
+        },
+      ],
     },
     {
-      "name": "gif_player",
-      "srcPath": "../../harmony/gif_player"
-    }
-  ]
+      name: 'gif_player',
+      srcPath: '../../harmony/gif_player',
+    },
+  ],
 }

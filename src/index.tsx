@@ -9,7 +9,15 @@ import GifPlayerNativeView from './GifPlayerViewNativeComponent';
 import type { GifPlayerViewComponent } from './GifPlayerViewNativeComponent';
 import { Commands } from './GifPlayerViewNativeComponent';
 import type { Int32 } from 'react-native/Libraries/Types/CodegenTypes';
-const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+// RN <= 0.77 exports the function directly (module.exports, CJS), while
+// RN >= 0.82 uses `export default` (ESM), so require() returns `{ default: fn }`.
+// Babel interop only applies to `import` statements, so unwrap `.default` manually
+// to stay compatible with both module shapes.
+const resolveAssetSourceModule = require('react-native/Libraries/Image/resolveAssetSource');
+const resolveAssetSource =
+  typeof resolveAssetSourceModule === 'function'
+    ? resolveAssetSourceModule
+    : resolveAssetSourceModule.default;
 
 type Props = ComponentProps<typeof GifPlayerNativeView>;
 interface SourceProps {
