@@ -3,16 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "i": "cd ../ && npm i --legacy-peer-deps && npm run pack && cd ./example && npm i --legacy-peer-deps",
+    "fast:pkg": "npm run fast-install-project && npm run dev",
+    "fast-install-project": "cd ../ && npm i --legacy-peer-deps && npm run pack && cd ./example && npm i --legacy-peer-deps",
+    "pack:pkg": "cd ../ && npm run pack && cd ./example",
+    "reStart": "npm run install:pkg && npm run codegen && hdc rport tcp:8081 tcp:8081 && react-native start",
     "start": "hdc rport tcp:8081 tcp:8081 && react-native start",
-    "codegen": "npm run codegen:lib && react-native codegen-harmony --ets-output-path ./harmony/entry/src/main/ets/generated",
+    "install:pkg": "npm uninstall @react-native-ohos/react-native-gif-player && cd ../ && npm run pack && cd ./example && npm i @react-native-ohos/react-native-gif-player@file:../react-native-ohos-react-native-gif-player-1.0.0.tgz",
+    "codegen": "react-native codegen-harmony --cpp-output-path ./harmony/entry/src/main/cpp/generated --rnoh-module-path ./harmony/entry/oh_modules/@rnoh/react-native-openharmony",
     "dev": "npm run codegen && react-native bundle-harmony --dev --minify=false",
     "prod": "npm run codegen && react-native bundle-harmony --dev=false --minify=true",
-    "pack:pkg": "npm --prefix .. run pack",
-    "install:pkg": "npm run pack:pkg && npm install @react-native-ohos/react-native-gif-player@file:../react-native-ohos-react-native-gif-player-1.0.0.tgz --legacy-peer-deps",
-    "fast-install-project": "npm run pack:pkg && npm install --legacy-peer-deps",
-    "fastpkg": "npm run fast-install-project && npm run dev",
-    "fast:pkg": "npm run fastpkg",
-    "codegen:lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-gif-player --cpp-output-path ../harmony/gif_player/src/main/cpp/generated --ets-output-path ../harmony/gif_player/src/main/ets/generated --cpp-components-spec-paths ../specs",
     "postinstall": "node ./scripts/create-build-profile"
   },
   "dependencies": {

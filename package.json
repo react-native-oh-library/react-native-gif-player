@@ -45,7 +45,13 @@
   "author": "ysfzrn <ysfzrn@gmail.com> (https://github.com/ysfzrn)",
   "license": "MIT",
   "harmony": {
-    "alias": "react-native-gif-player"
+    "alias": "react-native-gif-player",
+    "autolinking": {
+      "cppPackageClassName": "GifPlayerPackage",
+      "cmakeLibraryTargetName": "gif_player",
+      "ohPackageName": "@react-native-ohos/react-native-gif-player",
+      "etsPackageClassName": "GifPlayerPackage"
+    }
     },
   "homepage": "https://github.com/react-native-oh-library/react-native-gif-player#READEME",
   "publishConfig": {
