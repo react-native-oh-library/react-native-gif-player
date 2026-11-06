@@ -240,82 +240,39 @@ const App = () => {
 
 完整示例（本地 GIF / 网络 GIF / 静态图 / 自定义 URL 四种源、事件日志、跳帧与内存释放演示）见 [example](./example) 目录。
 
-## 使用说明
-
-**1. JS 侧**：安装依赖（见「下载安装」），在业务代码中直接使用 `GifPlayerView`（见「使用示例」）。
-
-**2. 鸿蒙侧**：npm 包内包含鸿蒙库源码目录 `harmony/gif_player`（oh-package 包名为 `@react-native-ohos/react-native-gif-player`），以下两种引入方式任选其一：
-
-- 方式 A：源码引用（本仓库 example 工程采用的方式）。在 `entry/oh-package.json5` 中按工程实际相对路径引用源码目录：
-
-```json5
-// harmony/entry/oh-package.json5
-{
-  "dependencies": {
-    "@rnoh/react-native-openharmony": "file:../../node_modules/@react-native-oh/react-native-harmony/react_native_openharmony_release.har",
-    "@react-native-ohos/react-native-gif-player": "file:../../../harmony/gif_player"
-  }
-}
-```
-
-- 方式 B：构建 har 引用。使用 DevEco Studio 构建 `harmony/gif_player` 模块生成 `gif_player.har`，拷贝到鸿蒙工程（如 `entry/libs/` 目录）后引用：
-
-```json5
-// harmony/entry/oh-package.json5
-{
-  "dependencies": {
-    "@rnoh/react-native-openharmony": "file:../../node_modules/@react-native-oh/react-native-harmony/react_native_openharmony_release.har",
-    "@react-native-ohos/react-native-gif-player": "file:./libs/gif_player.har"
-  }
-}
-```
-
-**3. 注册 RNOH Package**：若工程启用 RNOH autolinking，`RNPackagesFactory.ets` 由工具自动生成，无需手动修改；手动注册方式如下（以 RNOH 0.72 为例，与本仓库 example 工程一致；不同 RNOH 版本的注册文件命名可能存在差异，以所用版本的 RNOH 文档为准）：
-
-```ets
-// entry/src/main/ets/RNPackagesFactory.ets
-import { RNPackageContext, RNPackage } from '@rnoh/react-native-openharmony/ts';
-import GifPlayerPackage from '@react-native-ohos/react-native-gif-player';
-
-export function createRNPackages(ctx: RNPackageContext): RNPackage[] {
-  return [
-    new GifPlayerPackage(ctx),
-  ];
-}
-```
-
-**4.** 执行 `ohpm install` 安装依赖后即可编译运行。
-
 ## 接口说明
+
+> [!TIP] "平台"列表示该属性在原三方库上支持的平台。
+
+> [!TIP] "OpenHarmony平台支持"列为 "是" 表示 OpenHarmony 平台支持该属性；"否" 则表示不支持；"部分支持" 表示仅实现了功能的一部分。使用方法跨平台一致，效果对标 iOS 或 Android 的效果。
 
 ### GifPlayerView Props
 
-| 名称 | 类型 | 必填 | 默认值 | 描述 |
-| --- | --- | --- | --- | --- |
-| source | `{ uri: string; type?: string }` \| `number` | 是 | - | 图片源；网络/远程源传 `{ uri }`，本地资源传 `require('./demo.gif')`（内部经 `resolveAssetSource` 解析） |
-| paused | boolean | 是 | `false` | 是否暂停播放。注意：若未显式传入该 prop，组件默认**自动播放**（与 iOS/Android 端默认行为一致） |
-| loopCount | Int32 | 否 | `0` | 循环次数；`0` 表示无限循环，`>0` 时播放指定轮数后停在末帧 |
-| 其余属性 | ViewProps | 否 | - | 继承自 RN `View`（style、testID 等） |
+| 名称 | 参数类型 | 默认值 | 必填 | 平台 | OpenHarmony平台支持 | 描述 |
+| --- | --- | --- | --- | --- | --- | --- |
+| source | `{ uri: string; type?: string }` \| `number` | - | 是 | iOS, Android | 支持 | 图片源；网络/远程源传 `{ uri }`，本地资源传 `require('./demo.gif')`（内部经 `resolveAssetSource` 解析） |
+| paused | boolean | `false` | 是 | iOS, Android | 支持 | 是否暂停播放。注意：若未显式传入该 prop，组件默认**自动播放**（与 iOS/Android 端默认行为一致） |
+| loopCount | Int32 | `0` | 否 | iOS, Android | 支持 | 循环次数；`0` 表示无限循环，`>0` 时播放指定轮数后停在末帧 |
 
 ### Events
 
 以下事件均通过 `event.nativeEvent` 携带数据：
 
-| 事件 | nativeEvent | 触发时机 |
-| --- | --- | --- |
-| onLoad | `{ duration: Double; frameCount: Int32 }` | 加载完成；duration 为总时长（毫秒），静态图返回 `{ duration: 0, frameCount: 1 }` |
-| onStart | - | 开始播放 |
-| onStop | - | 暂停或停止播放 |
-| onEnd | - | 每轮播放到最后一帧 |
-| onFrame | `{ frameNumber: Int32 }` | 帧变化；帧号从 1 开始 |
-| onError | `{ error: string }` | 加载/播放失败（网络/本地源加载失败自动重试 3 次后触发） |
+| 名称 | 参数类型 | 默认值 | 必填 | 平台 | OpenHarmony平台支持 | 描述 |
+| --- | --- | --- | --- | --- | --- | --- |
+| onLoad | `{ duration: Double; frameCount: Int32 }` | - | 否 | iOS, Android | 支持 | 加载完成；duration 为总时长（毫秒），静态图返回 `{ duration: 0, frameCount: 1 }` |
+| onStart | - | - | 否 | iOS, Android | 支持 | 开始播放 |
+| onStop | - | - | 否 | iOS, Android | 支持 | 暂停或停止播放 |
+| onEnd | - | - | 否 | iOS, Android | 支持 | 每轮播放到最后一帧 |
+| onFrame | `{ frameNumber: Int32 }` | - | 否 | iOS, Android | 支持 | 帧变化；帧号从 1 开始 |
+| onError | `{ error: string }` | - | 否 | iOS, Android | 支持 | 加载/播放失败（网络/本地源加载失败自动重试 3 次后触发） |
 
 ### Methods（ref 命令）
 
-| 方法 | 参数 | 描述 |
-| --- | --- | --- |
-| jumpToFrame | `frameNumber: Int32` | 跳转到指定帧（从 0 开始），保持当前播放状态 |
-| memoryClear | - | 释放全部已解码帧与 ImageSource，回收内存；调用后画面清空，需重新设置 `source` 才能恢复播放 |
+| 名称 | 参数类型 | 默认值 | 必填 | 平台 | OpenHarmony平台支持 | 描述 |
+| --- | --- | --- | --- | --- | --- | --- |
+| jumpToFrame | `frameNumber: Int32` | - | 是 | iOS, Android | 支持 | 跳转到指定帧（从 0 开始），保持当前播放状态 |
+| memoryClear | - | - | 否 | iOS, Android | 支持 | 释放全部已解码帧与 ImageSource，回收内存；调用后画面清空，需重新设置 `source` 才能恢复播放 |
 
 ## 遗留问题
 
