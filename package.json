@@ -22,7 +22,8 @@
   "scripts": {
     "codegen-lib": "react-native codegen-lib-harmony --no-safety-check --npm-package-name react-native-gif-player --cpp-output-path ./harmony/gif_player/src/main/cpp/generated --ets-output-path ./harmony/gif_player/src/main/ets/generated --cpp-components-spec-paths ./specs",
     "pack": "npm pack",
-    "test": "jest",
+    "test": "jest --no-coverage",
+    "test:coverage": "jest --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
@@ -52,7 +53,7 @@
       "ohPackageName": "@react-native-ohos/react-native-gif-player",
       "etsPackageClassName": "GifPlayerPackage"
     }
-    },
+  },
   "homepage": "https://github.com/react-native-oh-library/react-native-gif-player#READEME",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -95,13 +96,6 @@
   "packageManager": "yarn@4.1.0",
   "engines": {
     "node": ">= 18.0.0"
-  },
-  "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ]
   },
   "commitlint": {
     "extends": [
